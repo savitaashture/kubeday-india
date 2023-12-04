@@ -13,8 +13,8 @@ metadata:
 
     # Fetch the git-clone task from hub, we are able to reference later on it
     # with taskRef and it will automatically be embedded into our pipeline.
-    pipelinesascode.tekton.dev/task: "git-clone"
-    pipelinesascode.tekton.dev/task1: "kaniko"
+    pipelinesascode.tekton.dev/task: "[git-clone, kaniko]"
+    # pipelinesascode.tekton.dev/task1: "kaniko"
 
     # Use maven task from hub
     #
