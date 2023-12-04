@@ -100,7 +100,7 @@ spec:
               script: |
                 echo "what is revision"
                 echo $(params.source_branch)
-                echo $(tasks.kaniko.results.IMAGE_DIGEST)
+                echo $(tasks.build-and-push-image.results.IMAGE_DIGEST)
                 exit 0              
   workspaces:
   - name: source
