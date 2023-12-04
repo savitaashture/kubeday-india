@@ -86,7 +86,7 @@ spec:
       - name: noop-task
         displayName: Task with no effect
         runAfter:
-          - kaniko
+          - build-and-push-image
         workspaces:
           - name: source
             workspace: source
