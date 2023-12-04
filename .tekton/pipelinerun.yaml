@@ -14,7 +14,7 @@ metadata:
     # Fetch the git-clone task from hub, we are able to reference later on it
     # with taskRef and it will automatically be embedded into our pipeline.
     pipelinesascode.tekton.dev/task: "git-clone"
-    # pipelinesascode.tekton.dev/task1: "https://github.com/tektoncd/catalog/blob/main/task/kaniko/0.6/kaniko.yaml"
+    pipelinesascode.tekton.dev/task1: "kaniko"
 
     # Use maven task from hub
     #
@@ -35,13 +35,17 @@ spec:
       value: "{{ repo_url }}"
     - name: revision
       value: "{{ revision }}"
+    - name: registry
+      value: quay.io/savitaashture
   pipelineSpec:
     params:
       - name: repo_url
       - name: revision
+      - name: registry
     workspaces:
       - name: source
       - name: basic-auth
+      - name: dockerconfig
     tasks:
       - name: fetch-repository
         taskRef:
@@ -76,6 +80,24 @@ spec:
                 echo "what is revision"
                 echo $(params.revision)
                 exit 0
+      - name: build-and-push-image
+        taskRef:
+          name: kaniko
+        runAfter:
+          - fetch-repository          
+        workspaces:
+          - name: output
+            workspace: source
+          - name: basic-auth
+            workspace: basic-auth
+          - name: dockerconfig
+            workspace: dockerconfig
+        params:
+          - name: IMAGE
+            value: $(params.registry)/kaniko-chains:$(params.revision)
+          - name: EXTRA_ARGS
+            value:
+              - --skip-tls-verify            
   workspaces:
   - name: source
     volumeClaimTemplate:
@@ -90,6 +112,6 @@ spec:
   - name: basic-auth
     secret:
       secretName: "{{ git_auth_secret }}"
-  # - name: dockerconfig
-   # secret:
-    #  secretName: dockerconfig-quay
+  - name: dockerconfig
+    secret:
+      secretName: dockerconfig-quay
