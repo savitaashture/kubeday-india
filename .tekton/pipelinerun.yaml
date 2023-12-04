@@ -35,12 +35,15 @@ spec:
       value: "{{ repo_url }}"
     - name: revision
       value: "{{ revision }}"
+    - name: source_branch
+      value: "{{ source_branch }}"
     - name: registry
       value: quay.io/savitaashture
   pipelineSpec:
     params:
       - name: repo_url
       - name: revision
+      - name: source_branch
       - name: registry
     workspaces:
       - name: source
@@ -60,26 +63,6 @@ spec:
             value: $(params.repo_url)
           - name: revision
             value: $(params.revision)
-      # Customize this task if you like, or just do a taskRef
-      # to one of the hub task.
-      - name: noop-task
-        displayName: Task with no effect
-        runAfter:
-          - fetch-repository
-        workspaces:
-          - name: source
-            workspace: source
-        taskSpec:
-          workspaces:
-            - name: source
-          steps:
-            - name: noop-task
-              image: registry.access.redhat.com/ubi9/ubi-micro
-              workingDir: $(workspaces.source.path)
-              script: |
-                echo "what is revision"
-                echo $(params.revision)
-                exit 0
       - name: build-and-push-image
         taskRef:
           name: kaniko
@@ -94,10 +77,31 @@ spec:
             workspace: dockerconfig
         params:
           - name: IMAGE
-            value: $(params.registry)/kaniko-chains:$(params.revision)
+            value: $(params.registry)/kaniko-chains:$(params.source_branch)
           - name: EXTRA_ARGS
             value:
-              - --skip-tls-verify            
+              - --skip-tls-verify
+      # Customize this task if you like, or just do a taskRef
+      # to one of the hub task.
+      - name: noop-task
+        displayName: Task with no effect
+        runAfter:
+          - build-and-push-image
+        workspaces:
+          - name: source
+            workspace: source
+        taskSpec:
+          workspaces:
+            - name: source
+          steps:
+            - name: noop-task
+              image: registry.access.redhat.com/ubi9/ubi-micro
+              workingDir: $(workspaces.source.path)
+              script: |
+                echo "what is revision"
+                echo $(params.source_branch)
+                echo $(tasks.build-and-push-image.results.IMAGE_DIGEST)
+                exit 0              
   workspaces:
   - name: source
     volumeClaimTemplate:
