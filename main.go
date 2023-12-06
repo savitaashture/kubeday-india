@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-const unused = `unusedstr`
+const unused = `unusedstr1`
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	// Extract the path variable from the URL
