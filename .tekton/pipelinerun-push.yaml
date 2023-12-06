@@ -36,15 +36,15 @@ spec:
       value: "{{ repo_url }}"
     - name: revision
       value: "{{ revision }}"
-    - name: source_branch
-      value: "{{ source_branch }}"
+    - name: target_branch
+      value: "{{ target_branch }}"
     - name: registry
       value: quay.io/savitaashture
   pipelineSpec:
     params:
       - name: repo_url
       - name: revision
-      - name: source_branch
+      - name: target_branch
       - name: registry
     workspaces:
       - name: source
@@ -89,7 +89,7 @@ spec:
             workspace: dockerconfig
         params:
           - name: IMAGE
-            value: $(params.registry)/kaniko-chains:$(params.source_branch)
+            value: $(params.registry)/kaniko-chains:$(params.target_branch)
           - name: EXTRA_ARGS
             value:
               - --skip-tls-verify
