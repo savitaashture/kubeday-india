@@ -38,7 +38,7 @@
 
 6. Verify that the pushed image is signed and attested using Tekton Chains
 
-## Documentation References:
+## Documentation References
 
 Tekton Pipeline doc: https://tekton.dev/docs/
 Tekton Chains doc: https://tekton.dev/docs/chains/
