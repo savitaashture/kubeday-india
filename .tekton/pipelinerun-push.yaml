@@ -14,7 +14,8 @@ metadata:
     # Fetch the git-clone task from hub, we are able to reference later on it
     # with taskRef and it will automatically be embedded into our pipeline.
     pipelinesascode.tekton.dev/task: "git-clone"
-    pipelinesascode.tekton.dev/task-1: "kaniko"
+    pipelinesascode.tekton.dev/task-1: "golangci-lint"
+    pipelinesascode.tekton.dev/task-2: "kaniko"
 
     # Use maven task from hub
     #
@@ -60,26 +61,17 @@ spec:
             value: $(params.repo_url)
           - name: revision
             value: $(params.revision)
-      # Customize this task if you like, or just do a taskRef
-      # to one of the hub task.
-      - name: noop-task
-        displayName: Task with no effect
+      - name: golangci-lint
+        taskRef:
+          name: golangci-lint
         runAfter:
           - fetch-repository
+        params:
+          - name: package
+            value: .
         workspaces:
           - name: source
-            workspace: source
-        taskSpec:
-          workspaces:
-            - name: source
-          steps:
-            - name: noop-task
-              image: registry.access.redhat.com/ubi9/ubi-micro
-              workingDir: $(workspaces.source.path)
-              script: |
-                echo "what is revision"
-                echo $(params.revision)
-                exit 0
+            workspace: source 
       - name: build-and-push-image
         taskRef:
           name: kaniko
