@@ -7,8 +7,6 @@ import (
 	"strings"
 )
 
-const unused = `unusedstr1`
-
 func handler(w http.ResponseWriter, r *http.Request) {
 	// Extract the path variable from the URL
 	path := strings.TrimPrefix(r.URL.Path, "/")
@@ -19,7 +17,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	// Write the HTML response
 	w.Header().Set("Content-Type", "text/html")
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(htmlResponse))
+	_, err := w.Write([]byte(htmlResponse))
+	log.Fatal(err)
 }
 
 func main() {
