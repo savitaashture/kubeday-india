@@ -89,7 +89,7 @@ spec:
             workspace: dockerconfig
         params:
           - name: IMAGE
-            value: $(params.registry)/kubeday-app:main1
+            value: $(params.registry)/kubeday-app:$(params.target_branch)
           - name: EXTRA_ARGS
             value:
               - --skip-tls-verify
