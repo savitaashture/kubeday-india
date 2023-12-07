@@ -18,7 +18,18 @@
     kubectl apply -f https://storage.googleapis.com/tekton-releases/chains/previous/v0.19.0/release.yaml
     ```
 
-3. Setup Pipelines as Code
+3. Install Tekton Dashboard
+    ```bash
+    kubectl apply --filename https://storage.googleapis.com/tekton-releases/dashboard/latest/release.yaml
+    ```
+
+    1. access Dashboard
+       ```bash
+       kubectl --namespace tekton-pipelines port-forward svc/tekton-dashboard 9097:9097
+       ```
+       http://localhost:9097/
+
+4. Setup Pipelines as Code
     1. Install
     ```bash
     kubectl apply -f https://github.com/openshift-pipelines/pipelines-as-code/releases/download/v0.22.4/release.k8s.yaml
@@ -38,11 +49,11 @@
     4. Create and configure the GithubApp
     5. Create a repository
 
-4. Send a pull request to https://github.com/savitaashture/kubeday-india and observe the triggering of the PipelineRun for the pull request
+5. Send a pull request to https://github.com/savitaashture/kubeday-india and observe the triggering of the PipelineRun for the pull request
 
-5. After sending a push request, check if the PipelineRun for the push request is triggered.
+6. After sending a push request, check if the PipelineRun for the push request is triggered.
 
-6. Verify that the pushed image is signed and attested using Tekton Chains
+7. Verify that the pushed image is signed and attested using Tekton Chains
 
 ## Documentation References
 
