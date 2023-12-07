@@ -8,7 +8,7 @@ import (
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	// Extract the path variable from the URLs
+	// Extract the path variable from the URL
 	path := strings.TrimPrefix(r.URL.Path, "/")
 
 	// Generate an HTML response with tags
@@ -18,9 +18,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	w.WriteHeader(http.StatusOK)
 	_, err := w.Write([]byte(htmlResponse))
-	// if err != nil {
-	//	log.Fatal(err)
-	//}
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func main() {
