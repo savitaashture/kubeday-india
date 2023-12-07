@@ -53,4 +53,3 @@ Tekton Chains doc: https://tekton.dev/docs/chains/
 Pipelines as Code: https://pipelinesascode.com/
 
 Demo Repository: https://github.com/savitaashture/kubeday-india
-
