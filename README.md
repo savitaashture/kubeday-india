@@ -50,11 +50,13 @@
        1. Create and configure the GithubApp https://pipelinesascode.com/docs/install/github_apps/
        2. Create a repository https://pipelinesascode.com/docs/guide/repositorycrd/
 
-5. Send a pull request to https://github.com/savitaashture/kubeday-india and observe the triggering of the PipelineRun for the pull request
+5. Follow Tekton Chains Tutorial https://github.com/tektoncd/chains/blob/main/docs/tutorials/signed-provenance-tutorial.md to set up Chains to sign OCI images built in Tekton
+   
+6. Send a pull request to https://github.com/savitaashture/kubeday-india and observe the triggering of the PipelineRun for the pull request
 
-6. After sending a push request, check if the PipelineRun for the push request is triggered.
+7. After sending a push request, check if the PipelineRun for the push request is triggered.
 
-7. Verify that the pushed image is signed and attested using Tekton Chains
+8. Verify that the pushed image is signed and attested using Tekton Chains
 
 ## Documentation References
 
