@@ -36,12 +36,14 @@
     ```
     2. Port forward the pipelines-as-code controller
        
-            a. kubectl port-forward <pipelines-as-code-controller-pod-name> 8080:8080 -n pipelines-as-code
+            a. kubectl --namespace pipelines-as-code port-forward svc/pipelines-as-code-controller 8080:8080
        
             b. Use the gosmee client with the following command
+       
                ```bash
                gosmee client https://hook.pipelinesascode.com/PCoifdgYPYpS http://localhost:8080
                ```
+       
        **OR**
        
        Follow : https://github.com/openshift-pipelines/pipelines-as-code/blob/main/hack/dev/kind/install.sh to create Kind, install Tekton Pipeline and setup gosmee
