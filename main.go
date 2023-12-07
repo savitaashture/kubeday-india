@@ -12,15 +12,15 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	path := strings.TrimPrefix(r.URL.Path, "/")
 
 	// Generate an HTML response with tags
-	htmlResponse := fmt.Sprintf("<html><body><h1>Hello, It's Kubeday India 2023!!! and we are updated new image version %s</h1></body></html>", path)
+	htmlResponse := fmt.Sprintf("<html><body><h1>Hello, It's Kubeday India 2023!!! and we are creating image version %s</h1></body></html>", path)
 
 	// Write the HTML response
 	w.Header().Set("Content-Type", "text/html")
 	w.WriteHeader(http.StatusOK)
 	_, err := w.Write([]byte(htmlResponse))
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func main() {
