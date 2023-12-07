@@ -46,8 +46,9 @@
        
        Follow : https://github.com/openshift-pipelines/pipelines-as-code/blob/main/hack/dev/kind/install.sh to create Kind, install Tekton Pipeline and setup gosmee
        
-    4. Create and configure the GithubApp
-    5. Create a repository
+    4. Follow https://pipelinesascode.com/
+       1. Create and configure the GithubApp https://pipelinesascode.com/docs/install/github_apps/
+       2. Create a repository https://pipelinesascode.com/docs/guide/repositorycrd/
 
 5. Send a pull request to https://github.com/savitaashture/kubeday-india and observe the triggering of the PipelineRun for the pull request
 
