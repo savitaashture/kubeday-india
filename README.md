@@ -24,13 +24,18 @@
     kubectl apply -f https://github.com/openshift-pipelines/pipelines-as-code/releases/download/v0.22.4/release.k8s.yaml
     ```
     2. Port forward the pipelines-as-code controller
+       
             a. kubectl port-forward <pipelines-as-code-controller-pod-name> 8080:8080 -n pipelines-as-code
+       
             b. Use the gosmee client with the following command
             ```bash
             gosmee client https://hook.pipelinesascode.com/PCoifdgYPYpS http://localhost:8080
             ```
-    3. Create and configure the GithubApp
-    4. Create a repository
+                                 **OR**
+           Follow : https://github.com/openshift-pipelines/pipelines-as-code/blob/main/hack/dev/kind/install.sh to create Kind, install Tekton Pipeline and setup gosmee
+       
+    4. Create and configure the GithubApp
+    5. Create a repository
 
 4. Send a pull request to https://github.com/savitaashture/kubeday-india and observe the triggering of the PipelineRun for the pull request
 
@@ -41,7 +46,9 @@
 ## Documentation References
 
 Tekton Pipeline doc: https://tekton.dev/docs/
+
 Tekton Chains doc: https://tekton.dev/docs/chains/
+
 Pipelines as Code: https://pipelinesascode.com/
 
 Demo Repository: https://github.com/savitaashture/kubeday-india
