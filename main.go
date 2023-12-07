@@ -8,7 +8,7 @@ import (
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	// Extract the path variable from the URL
+	// Extract the path variable from the URLs
 	path := strings.TrimPrefix(r.URL.Path, "/")
 
 	// Generate an HTML response with tags
