@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubeday-app-integ
+  namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: myimage=quay.io/savitaashture/kubeday-app:main
+    argocd-image-updater.argoproj.io/myimage.update-strategy: latest
+    argocd-image-updater.argoproj.io/myimage.platforms: linux/arm64,linux/amd64
+    argocd-image-updater.argoproj.io/myimage.allow-tags: "regexp:^main$"
+    argocd-image-updater.argoproj.io/argocd.force-update: "true"
+    argocd-image-updater.argoproj.io/write-back-method: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/anandf/code-to-deployment.git'
+    path: kustomize_kubeday/overlays/integ
+    targetRevision: HEAD
+    kustomize:
+      images:
+        - >-
+          KUBEDAY_IMAGE=quay.io/savitaashture/kubeday-app:main
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: kubeday-integ
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
