@@ -28,11 +28,12 @@
             a. kubectl port-forward <pipelines-as-code-controller-pod-name> 8080:8080 -n pipelines-as-code
        
             b. Use the gosmee client with the following command
-            ```bash
-            gosmee client https://hook.pipelinesascode.com/PCoifdgYPYpS http://localhost:8080
-            ```
-                                 **OR**
-           Follow : https://github.com/openshift-pipelines/pipelines-as-code/blob/main/hack/dev/kind/install.sh to create Kind, install Tekton Pipeline and setup gosmee
+               ```bash
+               gosmee client https://hook.pipelinesascode.com/PCoifdgYPYpS http://localhost:8080
+               ```
+       **OR**
+       
+       Follow : https://github.com/openshift-pipelines/pipelines-as-code/blob/main/hack/dev/kind/install.sh to create Kind, install Tekton Pipeline and setup gosmee
        
     4. Create and configure the GithubApp
     5. Create a repository
