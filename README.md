@@ -90,7 +90,7 @@ kubectl create secret generic argocd-image-updater-secret \
 
 ## Install the argo application
 ```
-kubectl create -f application_integ.yaml -n argocd
+kubectl create -f argo/application.yaml -n argocd
 ```
 
 ## Install Sigstore Policy Controller
@@ -108,12 +108,7 @@ kubectl -n cosign-system wait --for=condition=Available deployment/policy-contro
 kubectl -n cosign-system wait --for=condition=Available deployment/policy-controller-webhook
 ```
 
-## Enable guestbook namespace in image validation and policy enforcement
-```
-kubectl create ns guestbook
-kubectl label namespace guestbook policy.sigstore.dev/include=true
-```
-
+## Enable kubeday-integ namespace in image validation and policy enforcement
 ```
 kubectl create ns kubeday-integ
 kubectl label namespace kubeday-integ policy.sigstore.dev/include=true
