@@ -4,7 +4,7 @@
 
 1. Ensure that you have a Kubernetes cluster running version 1.25 or later.
     1.1. You can use Kind/Minikube for this purpose.
-2. Have the kubectl CLI tool installed.
+2. Have the kubectl CLI tool installed
 
 ## Installation
 
