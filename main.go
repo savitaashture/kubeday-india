@@ -18,9 +18,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	w.WriteHeader(http.StatusOK)
 	_, err := w.Write([]byte(htmlResponse))
-	if err != nil {
-		log.Fatal(err)
-	}
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
 }
 
 func main() {
